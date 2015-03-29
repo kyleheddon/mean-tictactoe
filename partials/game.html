@@ -1,0 +1,18 @@
+<section id="game">
+    <h1>{{game.title}}</h1>
+    <h2 ng-show="!game.complete">{{game.whosTurn}}'s Turn</h2>
+    <h2 ng-show="game.complete">{{game.winner || 'Cat'}} Wins</h2>
+
+
+    <table>
+        <tr ng-repeat="row in game.board track by $index" ng-init="$row=$index">
+            <td ng-repeat="column in row track by $index" ng-init="$column=$index" ng-click="boardClicked($row, $column)">
+                {{column}}
+            </td>
+        </tr>
+    </table>
+
+    <button ng-click="delete(game)">Delete</button>
+    <br/>
+    <a href="#">Back</a>
+</section>

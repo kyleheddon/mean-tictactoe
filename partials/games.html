@@ -1,0 +1,28 @@
+<section id="todoapp">
+    <header id="header">
+        <h1>Games</h1>
+        <form id="game-form" ng-submit="addGame(gameTitle)">
+            <input id="new-game" placeholder="Game Title?" ng-model="gameTitle" autofocus>
+        </form>
+    </header>
+    <section id="main" ng-show="games.length" ng-cloak>
+        <ul id="game-list">
+            <li ng-repeat="game in games | filter:statusFilter track by $index"
+                ng-class="{completed: game.completed}"
+                ng-show="!game.hidden">
+                <a href="#/games/{{game._id}}">
+                    <div class="view">
+                        <label ng-dblclick="editGame(game)">{{game.title}}</label>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <footer id="footer" ng-show="games.length" ng-cloak>
+        <span id="game-count"><strong>{{remainingCount}}</strong>
+            <ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+        </span>
+        <button id="clear-completed" ng-click="clearCompletedTodos()"
+            ng-show="completedCount">Clear completed ({{completedCount}})</button>
+    </footer>
+</section>
